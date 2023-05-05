@@ -1,13 +1,19 @@
 import os
 import boto3
 import zipfile
-from typing import List
+from typing import List, Any
 import io
 import base64
 from urllib.parse import parse_qs
 
 
-def download_and_extract_library(bucket_name, library_key):
+def download_and_extract_library(bucket_name: str, library_key: str) -> None:
+    """
+    Download and extract a zipped library from an S3 bucket.
+
+    :param bucket_name: Name of the S3 bucket.
+    :param library_key: Key of the library in the S3 bucket.
+    """
     s3 = boto3.client('s3')
     library_zip = '/tmp/library.zip'
     s3.download_file(bucket_name, library_key, library_zip)
@@ -18,6 +24,12 @@ def download_and_extract_library(bucket_name, library_key):
 
 
 def install_libs(bucket_name: str, libs: List[str]) -> None:
+    """
+    Download and extract multiple libraries from an S3 bucket.
+
+    :param bucket_name: Name of the S3 bucket.
+    :param libs: List of library keys to download and extract.
+    """
     library_keys = [f"tmp/library_with_deps_{x}.zip" for x in libs]
 
     for library_key in library_keys:
@@ -25,7 +37,14 @@ def install_libs(bucket_name: str, libs: List[str]) -> None:
         download_and_extract_library(bucket_name, library_key)
 
 
-def extract_csv_to_dataframe(main_val, pd):
+def extract_csv_to_dataframe(main_val: str, pd: Any) -> Any:
+    """
+    Extract CSV content from a string and convert it to a DataFrame.
+
+    :param main_val: String containing CSV content.
+    :param pd: pandas library instance.
+    :return: DataFrame containing the CSV data.
+    """
     # Split the lines in main_val
     lines = main_val.split('\n')
 
@@ -48,9 +67,16 @@ def extract_csv_to_dataframe(main_val, pd):
     return df
 
 
-def get_data_from_body(event):
+def get_data_from_body(event: dict) -> str:
+    """
+    Extract the CSV content from an API Gateway event body.
+
+    :param event: API Gateway event containing the request.
+    :return: String containing the CSV content.
+    """
     if event['isBase64Encoded']:
         event['body'] = base64.b64decode(event['body']).decode('utf-8')
+
     # Parse the POST request and extract the uploaded CSV file
     lowercase_headers = {k.lower(): v for k, v in event['headers'].items()}
     content_type = lowercase_headers['content-type']
