@@ -1,7 +1,10 @@
-import json
-
-
 def lambda_handler(event, context):
+    """
+    Selphaware home page
+    :param event:
+    :param context:
+    :return:
+    """
     body = """
 <!DOCTYPE html>
 <html lang="en">

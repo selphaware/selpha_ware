@@ -1,7 +1,13 @@
-import json
 from datetime import datetime
 
+
 def lambda_handler(event, context):
+    """
+    Mock google page
+    :param event:
+    :param context:
+    :return:
+    """
     year = str(datetime.now().year)
     html_content = f"""
 <!DOCTYPE html>

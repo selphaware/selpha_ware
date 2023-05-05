@@ -19,39 +19,85 @@ def serve_html_page():
     html = '''
     <html>
         <head>
-            <title>Data Description (Pandas) Tool</title>
+            <title>Data Description Tool</title>
             <style>
                 body {
-                    background-color: #2c3e50;
-                    color: #ecf0f1;
+                    background-color: #333;
                     font-family: Arial, sans-serif;
                     display: flex;
-                    justify-content: center;
                     align-items: center;
+                    justify-content: center;
                     height: 100vh;
                     margin: 0;
+                    color: #fff;
                 }
                 form {
-                    text-align: center;
+                    background-color: #222;
+                    padding: 2rem;
+                    border-radius: 5px;
                 }
-                input[type="file"] {
-                    color: #ecf0f1;
+                input[type="text"] {
+                    background-color: #555;
+                    border: none;
+                    color: white;
+                    padding: 0.5rem;
+                    width: 300px;
+                }
+                input[type="text"]:focus {
+                    outline: none;
+                    background-color: #666;
                 }
                 input[type="submit"] {
-                    background-color: #3498db;
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    font-size: 1rem;
                     border: none;
-                    color: #ecf0f1;
-                    padding: 10px 20px;
-                    text-decoration: none;
-                    margin: 4px 2px;
                     cursor: pointer;
-                    font-size: 16px;
+                    border-radius: 5px;
+                    margin-left: 0.5rem;
+                }
+                input[type="file"] {
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    font-size: 1rem;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    margin-left: 0.5rem;
+                }
+                input[type="submit"]:hover {
+                    background-color: #45A049;
+                }
+                .home {
+                    position: absolute;
+                    top: 20px;
+                    left: 20px;
+                    background-color: #555;
+                    color: white;
+                    padding: 0.5rem 1rem;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    font-size: 1rem;
+                    transition: background-color 0.2s;
+                }
+                .home:hover {
+                    background-color: #666;
+                }
+                footer {
+                    position: absolute;
+                    bottom: 20px;
+                    font-size: 0.8rem;
+                    color: white;
                 }
             </style>
         </head>
         <body>
+            <a class="home" href="https://selpha.com">Home</a>
             <form action="" method="post" enctype="multipart/form-data">
-                <h1>Upload CSV</h1>
+                <h1>Data Description Tool (Pandas)</h1>
+                <h2>Upload CSV</h2>
                 <input type="file" name="csv_file" accept=".csv"><br><br>
                 <input type="submit" value="Upload and Analyze">
             </form>
